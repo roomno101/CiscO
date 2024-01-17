@@ -1,0 +1,56 @@
+Write a C Program to calculate Odd and Even Parity for a Character
+
+#include <stdio.h>
+
+// Function to calculate odd parity
+int calculateOddParity(unsigned char data) {
+    int parity = 0;
+
+    // Loop through each bit
+    for (int i = 0; i < 8; i++) {
+        parity ^= (data & (1 << i)) >> i;
+    }
+
+    return parity;
+}
+
+// Function to calculate even parity
+int calculateEvenParity(unsigned char data) {
+    int parity = 1; // Start with 1 for even parity
+
+    // Loop through each bit
+    for (int i = 0; i < 8; i++) {
+        parity ^= (data & (1 << i)) >> i;
+    }
+
+    return parity;
+}
+
+int main() {
+    unsigned char inputData;
+    printf("Enter a character: ");
+    scanf("%c", &inputData);
+
+    // Display the binary representation of the input character
+    printf("Binary representation: ");
+    for (int i = 7; i >= 0; i--) {
+        printf("%d", (inputData >> i) & 1);
+    }
+
+    // Calculate and display odd parity
+    int oddParity = calculateOddParity(inputData);
+    printf("\nOdd Parity Bit: %d\n", oddParity);
+
+    // Calculate and display even parity
+    int evenParity = calculateEvenParity(inputData);
+    printf("Even Parity Bit: %d\n", evenParity);
+
+    return 0;
+}
+
+Output
+
+Enter a character: A
+Binary representation: 01000001
+Odd Parity Bit: 0
+Even Parity Bit: 1
